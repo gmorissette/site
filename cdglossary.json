@@ -6,7 +6,7 @@
             "term":"Modal",
             "definition":"A dialog box that appears in front of app content.",
             "usage":"Use for critical actions only.",
-            "french":"Approved"
+            "french":"Test"
         },
         {
             "term":"Toast",
