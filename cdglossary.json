@@ -1,0 +1,25 @@
+{
+    "id":"699f485643b1c97be99dc947",
+    "record":
+    [
+        {
+            "term":"Modal",
+            "definition":"A dialog box that appears in front of app content.",
+            "usage":"Use for critical actions only.",
+            "french":"Approved"
+        },
+        {
+            "term":"Toast",
+            "definition":"A brief message about app processes at the bottom of the screen.",
+            "usage":"Do not use for errors that require user action.",
+            "french":"In Review"
+        }
+    ],
+    "metadata":
+    {
+        "name":"testfile",
+        "readCountRemaining":91,
+        "timeToExpire":10993,
+        "createdAt":"2026-02-25T19:07:02.821Z"
+    }
+}
