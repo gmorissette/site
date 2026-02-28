@@ -1,31 +1,88 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-    padding: 50px;
+html, body {
+  height: 100%;
+  background: #ffffff;
+  color: #0a0a0a;
+  font-family: 'DM Mono', 'Courier New', monospace;
+  overflow: hidden;
 }
 
-header {
-    margin-bottom: 40px;
+main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #0077ff;
-    color: white;
+.name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
 }
 
-button:hover {
-    background-color: #005ecc;
+.word-wrap {
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.word {
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+
+  transform: translateY(100%) skewY(4deg);
+  opacity: 0;
+  filter: blur(4px);
+  animation: revealWord 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+.name .word-wrap:nth-child(2) .word {
+  animation-delay: 220ms;
+}
+
+/* After both words are in, the divider line draws */
+.name::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 0;
+  background: #0a0a0a;
+  animation: drawLine 0.8s ease forwards;
+  animation-delay: 0.9s;
+  margin-top: 0.8em;
+}
+
+@keyframes revealWord {
+  0% {
+    transform: translateY(100%) skewY(4deg);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: translateY(0) skewY(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    width: 100%;
+  }
 }
