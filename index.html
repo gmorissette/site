@@ -5,113 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guillaume Morissette</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><text y='.9em' font-size='75' font-family='monospace'>✱</text></svg>">
-  <style>
-    @font-face {
-      font-family: 'iaWriter';
-      src: url('iAWriterMonoS-Regular.woff2') format('woff2'),
-           url('iAWriterMonoS-Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #ffffff;
-      --fg: #33333A;
-      --hover: #555;
-      --muted: #999;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'iaWriter', monospace;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.5;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      min-height: 100vh;
-      display: flex;
-      overflow: hidden;
-    }
-
-    .column {
-      min-width: fit-content;
-      min-height: 100vh;
-      padding: 48px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .text-list { display: flex; flex-direction: column; gap: 2px; }
-
-    .joke-item {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 2px 0; cursor: default; white-space: nowrap;
-    }
-    .joke-item:hover { color: var(--hover); }
-    .joke {
-      color: var(--muted); opacity: 0;
-      transition: opacity 0.15s; white-space: nowrap;
-    }
-    .joke-item:hover .joke { opacity: 1; }
-
-    .link-item {
-      display: inline-flex; align-items: center; gap: 5px;
-      text-decoration: none; color: inherit;
-      padding: 2px 0; transition: color 0.15s; white-space: nowrap;
-      cursor: pointer; background: none; border: none;
-      font-family: inherit; font-size: inherit; font-weight: inherit;
-      letter-spacing: inherit; text-transform: inherit;
-    }
-    .link-item:hover { color: var(--hover); }
-    .link-arrow { color: var(--muted); opacity: 0; transition: opacity 0.15s; }
-    .link-item:hover .link-arrow { opacity: 1; }
-
-    .right { flex: 1; position: relative; overflow: hidden; }
-    canvas { display: block; width: 100%; height: 100%; }
-
-    .column > * {
-      opacity: 0;
-      transform: translateY(5px);
-      animation: fadeUp 0.35s forwards ease-out;
-    }
-    .column > *:nth-child(1) { animation-delay: 0.05s; }
-    .column > *:nth-child(2) { animation-delay: 0.12s; }
-    .column > *:nth-child(3) { animation-delay: 0.19s; }
-    .column > *:nth-child(4) { animation-delay: 0.26s; }
-
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
 </head>
-<body>
+<body class="home">
 
   <aside class="column">
     <div class="text-list">
-      <div class="joke-item">Guillaume Morissette</div>
-      <div class="joke-item">Writer </div>
-      <div class="joke-item">Sr. Content Designer </div>
-    </div>
-    <div class="text-list">
-      <div class="joke-item">Based in Toronto </div>
-    </div>
-    <div class="text-list">
-      <div class="joke-item">Contact<span class="joke">— bed.wave [at] gmail [dot] com</span></div>
-    </div>
-    <div class="text-list">
-      <a href="https://www.instagram.com/anxietyissue/" class="link-item">Instagram <span class="link-arrow">[↗]</span></a>
-      <a href="https://www.linkedin.com/in/guillaumemorissette/" class="link-item">LinkedIn <span class="link-arrow">[↗]</span></a>
+       <div class="joke-item"><span class="txt">Guillaume Morissette</span><span class="detail"></span></div>
+       <div class="joke-item"><span class="txt">Writer</span><span class="detail"></span></div>
+       <div class="joke-item"><span class="txt">My Dog</span><span class="detail">› Hermit</span><img class="hover-img" src="dog-reference.jpg" alt="My dog" width="640" height="428"></div>
+       <div class="joke-item"><span class="txt">Contact</span><span class="detail">› bed.wave [at] gmail [dot] com</span></div>
     </div>
   </aside>
 
-  <div class="right">
-    <canvas id="c"></canvas>
-  </div>
-
+  <script>
+    // The entrance animation below sets a `transform`, which creates a CSS
+    // stacking context on each nav group. Left in place, that would trap the
+    // dog photo's z-index inside its own group, forever painting below any
+    // group that comes later (e.g. Instagram/LinkedIn). Clearing the
+    // transform once the animation finishes removes that stacking context
+    // without changing how the entrance animation looks.
+    document.querySelectorAll('.column > *').forEach((el) => {
+      el.addEventListener('animationend', () => {
+        el.style.animation = 'none';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>
